@@ -2,11 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on caiyuan</title>
-    <link>https://blog.joway.io/posts/</link>
+    <link>https://volcanicbottle.github.io/posts/</link>
     <description>Recent content in Posts on caiyuan</description>
     <generator>Hugo</generator>
     <language>cn</language>
     <lastBuildDate></lastBuildDate>
-    <atom:link href="https://blog.joway.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://volcanicbottle.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

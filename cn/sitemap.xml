@@ -2,47 +2,47 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://blog.joway.io/</loc>
+    <loc>https://volcanicbottle.github.io/</loc>
     <lastmod>2025-01-05T20:39:16-05:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.joway.io/en/"
+                href="https://volcanicbottle.github.io/en/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
-                href="https://blog.joway.io/"
+                href="https://volcanicbottle.github.io/"
                 />
   </url><url>
-    <loc>https://blog.joway.io/posts/</loc>
+    <loc>https://volcanicbottle.github.io/posts/</loc>
     <lastmod>2025-01-05T20:39:16-05:00</lastmod>
   </url><url>
-    <loc>https://blog.joway.io/post/</loc>
+    <loc>https://volcanicbottle.github.io/post/</loc>
     <lastmod>2025-01-05T20:39:16-05:00</lastmod>
   </url><url>
-    <loc>https://blog.joway.io/categories/</loc>
+    <loc>https://volcanicbottle.github.io/categories/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.joway.io/en/categories/"
+                href="https://volcanicbottle.github.io/en/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
-                href="https://blog.joway.io/categories/"
+                href="https://volcanicbottle.github.io/categories/"
                 />
   </url><url>
-    <loc>https://blog.joway.io/tags/</loc>
+    <loc>https://volcanicbottle.github.io/tags/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.joway.io/en/tags/"
+                href="https://volcanicbottle.github.io/en/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
-                href="https://blog.joway.io/tags/"
+                href="https://volcanicbottle.github.io/tags/"
                 />
   </url>
 </urlset>

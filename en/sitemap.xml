@@ -2,40 +2,40 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://blog.joway.io/en/</loc>
+    <loc>https://volcanicbottle.github.io/en/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
-                href="https://blog.joway.io/"
+                href="https://volcanicbottle.github.io/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.joway.io/en/"
+                href="https://volcanicbottle.github.io/en/"
                 />
   </url><url>
-    <loc>https://blog.joway.io/en/categories/</loc>
+    <loc>https://volcanicbottle.github.io/en/categories/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
-                href="https://blog.joway.io/categories/"
+                href="https://volcanicbottle.github.io/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.joway.io/en/categories/"
+                href="https://volcanicbottle.github.io/en/categories/"
                 />
   </url><url>
-    <loc>https://blog.joway.io/en/tags/</loc>
+    <loc>https://volcanicbottle.github.io/en/tags/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
-                href="https://blog.joway.io/tags/"
+                href="https://volcanicbottle.github.io/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.joway.io/en/tags/"
+                href="https://volcanicbottle.github.io/en/tags/"
                 />
   </url>
 </urlset>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Joway&#39;s Blog</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content on Joway&#39;s Blog</description>
+    <generator>Hugo</generator>
+    <language>cn</language>
+    <lastBuildDate>Sun, 05 Jan 2025 20:39:16 -0500</lastBuildDate>
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>First Post</title>
+      <link>http://localhost:1313/post/first-post/</link>
+      <pubDate>Sun, 05 Jan 2025 20:39:16 -0500</pubDate>
+      <guid>http://localhost:1313/post/first-post/</guid>
+      <description>&lt;p&gt;###第二次第一个blog###&#xA;这是我的第二个博客网站，第一个使用了wordpress随手搭建了一个，但是一直什么东西都没写。然后1年服务器过期了，好处是发现做点好玩的东西真的非常简单，甚至可以不用花一分钱。&lt;/p&gt;&#xA;&lt;p&gt;这次是看到一个熟人的blog，他的blog有非常有意思的想法。其实我平时也会想些事情，但是总没有把这些奇怪的东西公开的打算。不过后来一想反正这个小网站一年也没有浏览量，只要我不公开宣传和放在私密空间吃灰也差不多（笑）。第二是我希望我可以有办法回顾和反思一下我的生活，毕竟没有ddl以后生活可以说颓废到混沌了，明明总是有一堆有意思有意义事情可以做。立个flag，每天写肯定是吹牛，每两天吧。两天一篇回顾一下生活和目标。感觉像是日记，正经人谁写日记啊哈哈哈哈哈。&lt;/p&gt;&#xA;&lt;p&gt;这个blog网站叫小菜园，就是现在找些好玩的种子种下去，看看几年后可以长出来什么好玩的东西。我是个很喜欢谐音梗的人，在这里讲个谐音梗笑话作为结尾：虾和蚌都得了一百分，朋友问虾：“你怎么考的？”虾得意地说：“我抄蚌的！”&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>第一个帖子</title>
+      <link>http://localhost:1313/posts/first-post/</link>
+      <pubDate>Sun, 05 Jan 2025 20:39:16 -0500</pubDate>
+      <guid>http://localhost:1313/posts/first-post/</guid>
+      <description>&lt;p&gt;这是我的&lt;del&gt;第二个&lt;/del&gt;博客网站，第一个使用了wordpress随手搭建了一个，但是一直什么东西都没写。然后1年服务器过期了，好处是发现做点好玩的东西真的非常简单，甚至可以不用花一分钱。&lt;/p&gt;&#xA;&lt;p&gt;这次是看到一个熟人的blog，他的blog有非常有意思的想法。其实我平时也会想些事情，但是总没有把这些奇怪的东西公开的打算。不过后来一想反正这个小网站一年也没有浏览量，只要我不公开宣传和放在私密空间吃灰也差不多（笑）。第二是我希望我可以有办法回顾和反思一下我的生活，毕竟没有ddl以后生活可以说颓废到混沌了，明明总是有一堆有意思有意义事情可以做。立个flag，每天写肯定是吹牛，每两天吧。两天一篇回顾一下生活和目标。感觉像是日记，正经人谁写日记啊哈哈哈哈哈。&lt;/p&gt;&#xA;&lt;p&gt;这个blog网站叫小菜园，就是现在找些好玩的种子种下去，看看几年后可以长出来什么好玩的东西。我是个很喜欢谐音梗的人，在这里讲个谐音梗笑话作为结尾：虾和蚌都得了一百分，朋友问虾：“你怎么考的？”虾得意地说：“我抄蚌的！”&lt;/p&gt;&#xA;&lt;p&gt;&lt;del&gt;下面的评论功能集成的真丑&lt;/del&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Hugo 0.139.0">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="" />
+  <meta property="og:url" content="http://localhost:1313/posts/%E5%B7%A6%E5%80%BC%E5%8F%B3%E5%80%BC/" />
+  <link rel="canonical" href="http://localhost:1313/posts/%E5%B7%A6%E5%80%BC%E5%8F%B3%E5%80%BC/" /><link rel="alternate" type="application/atom+xml" href="http://localhost:1313/index.xml" title="caiyuan">
+
+  <script type="application/ld+json">
+  {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+           "@type": "WebPage",
+           "@id": "http:\/\/localhost:1313\/"
+      },
+      "articleSection" : "posts",
+      "name" : "左值右值",
+      "headline" : "左值右值",
+      "description" : "左值右值 我学了两次这个左值右值，发现总忘。写这篇笔记记录一下方便复习。\n为什么要区分左值与右值？ 首先是为什么要有左值（lvalue）和右值(rvalue)，不少语言并不区分两个令人困惑的概念。\n真正的原因其实要追溯到C语言的设计，这里只看C\u002b\u002b上左右值的应用，实际上有自C\u002b\u002b11开始，表达式的值分为左值、将亡值、纯右值以及两种混合泛左值和右值五种。\n（知乎链接）\nC\u002b\u002b11 中有右值引用，通过这个可以实现移动赋值操作符，移动构造函数。这是什么？\nC\u002b\u002b有两种赋值方式：拷贝赋值和移动赋值。 拷贝赋值是十分常见的：\n\/\/ 创建一个 vector 并初始化 std::vector\u0026lt;int\u0026gt; vec1 = {1, 2, 3, 4, 5}; \/\/ 使用拷贝赋值将 vec1 的值赋给 vec2 std::vector\u0026lt;int\u0026gt; vec2; vec2 = vec1; 这就是一个最简单的拷贝，vec2 将会有复制一遍 vec1 的内容，但是储存在另一块内存中。以下是一个很简单的 Point 类，很好地说明了这一点：\n#include \u0026lt;iostream\u0026gt; class Point { public: \/\/ 构造函数 Point(int x = 0, int y = 0) : x_(x), y_(y) {} \/\/ 拷贝赋值运算符 Point \u0026amp;operator=(const Point \u0026amp;other) { \/\/ 直接赋值 x_ = other.x_; y_ = other.y_; return *this; \/\/ 返回当前对象的引用 } \/\/ 打印点的坐标 void print() const { std::cout \u0026lt;\u0026lt; \u0026#34;Point(\u0026#34; \u0026lt;\u0026lt; x_ \u0026lt;\u0026lt; \u0026#34;, \u0026#34; \u0026lt;\u0026lt; y_ \u0026lt;\u0026lt; \u0026#34;)\\n\u0026#34;; } }; 当然这存在一个问题，这种直接复制所有内容的深拷贝显然不适用于大量数据，好在C\u002b\u002b有指针。 移动赋值 解决了这个问题，通过“移动”资源的所有权，而不是复制资源，从而避免了昂贵的拷贝操作。移动操作将资源从一个对象转移到另一个对象，通常通过转移指针的方式，而不是进行深拷贝。相当于新对象窃取了源对象的资源。\n",
+      "inLanguage" : "en-US",
+      "author" : "",
+      "creator" : "",
+      "publisher": "",
+      "accountablePerson" : "",
+      "copyrightHolder" : "",
+      "copyrightYear" : "2025",
+      "datePublished": "2025-01-10 16:49:39 -0500 EST",
+      "dateModified" : "2025-01-10 16:49:39 -0500 EST",
+      "url" : "http:\/\/localhost:1313\/posts\/%E5%B7%A6%E5%80%BC%E5%8F%B3%E5%80%BC\/",
+      "keywords" : [  ]
+  }
+</script>
+<title>左值右值</title>
+  <meta property="og:title" content="左值右值" />
+  <meta property="og:type" content="article" />
+  <meta property="og:description" content="左值右值 我学了两次这个左值右值，发现总忘。写这篇笔记记录一下方便复习。
+为什么要区分左值与右值？ 首先是为什么要有左值（lvalue）和右值(rvalue)，不少语言并不区分两个令人困惑的概念。
+真正的原因其实要追溯到C语言的设计，这里只看C&#43;&#43;上左右值的应用，实际上有自C&#43;&#43;11开始，表达式的值分为左值、将亡值、纯右值以及两种混合泛左值和右值五种。
+（知乎链接）
+C&#43;&#43;11 中有右值引用，通过这个可以实现移动赋值操作符，移动构造函数。这是什么？
+C&#43;&#43;有两种赋值方式：拷贝赋值和移动赋值。 拷贝赋值是十分常见的：
+// 创建一个 vector 并初始化 std::vector&lt;int&gt; vec1 = {1, 2, 3, 4, 5}; // 使用拷贝赋值将 vec1 的值赋给 vec2 std::vector&lt;int&gt; vec2; vec2 = vec1; 这就是一个最简单的拷贝，vec2 将会有复制一遍 vec1 的内容，但是储存在另一块内存中。以下是一个很简单的 Point 类，很好地说明了这一点：
+#include &lt;iostream&gt; class Point { public: // 构造函数 Point(int x = 0, int y = 0) : x_(x), y_(y) {} // 拷贝赋值运算符 Point &amp;operator=(const Point &amp;other) { // 直接赋值 x_ = other.x_; y_ = other.y_; return *this; // 返回当前对象的引用 } // 打印点的坐标 void print() const { std::cout &lt;&lt; &#34;Point(&#34; &lt;&lt; x_ &lt;&lt; &#34;, &#34; &lt;&lt; y_ &lt;&lt; &#34;)\n&#34;; } }; 当然这存在一个问题，这种直接复制所有内容的深拷贝显然不适用于大量数据，好在C&#43;&#43;有指针。 移动赋值 解决了这个问题，通过“移动”资源的所有权，而不是复制资源，从而避免了昂贵的拷贝操作。移动操作将资源从一个对象转移到另一个对象，通常通过转移指针的方式，而不是进行深拷贝。相当于新对象窃取了源对象的资源。
+" />
+  <meta name="description" content="左值右值 我学了两次这个左值右值，发现总忘。写这篇笔记记录一下方便复习。
+为什么要区分左值与右值？ 首先是为什么要有左值（lvalue）和右值(rvalue)，不少语言并不区分两个令人困惑的概念。
+真正的原因其实要追溯到C语言的设计，这里只看C&#43;&#43;上左右值的应用，实际上有自C&#43;&#43;11开始，表达式的值分为左值、将亡值、纯右值以及两种混合泛左值和右值五种。
+（知乎链接）
+C&#43;&#43;11 中有右值引用，通过这个可以实现移动赋值操作符，移动构造函数。这是什么？
+C&#43;&#43;有两种赋值方式：拷贝赋值和移动赋值。 拷贝赋值是十分常见的：
+// 创建一个 vector 并初始化 std::vector&lt;int&gt; vec1 = {1, 2, 3, 4, 5}; // 使用拷贝赋值将 vec1 的值赋给 vec2 std::vector&lt;int&gt; vec2; vec2 = vec1; 这就是一个最简单的拷贝，vec2 将会有复制一遍 vec1 的内容，但是储存在另一块内存中。以下是一个很简单的 Point 类，很好地说明了这一点：
+#include &lt;iostream&gt; class Point { public: // 构造函数 Point(int x = 0, int y = 0) : x_(x), y_(y) {} // 拷贝赋值运算符 Point &amp;operator=(const Point &amp;other) { // 直接赋值 x_ = other.x_; y_ = other.y_; return *this; // 返回当前对象的引用 } // 打印点的坐标 void print() const { std::cout &lt;&lt; &#34;Point(&#34; &lt;&lt; x_ &lt;&lt; &#34;, &#34; &lt;&lt; y_ &lt;&lt; &#34;)\n&#34;; } }; 当然这存在一个问题，这种直接复制所有内容的深拷贝显然不适用于大量数据，好在C&#43;&#43;有指针。 移动赋值 解决了这个问题，通过“移动”资源的所有权，而不是复制资源，从而避免了昂贵的拷贝操作。移动操作将资源从一个对象转移到另一个对象，通常通过转移指针的方式，而不是进行深拷贝。相当于新对象窃取了源对象的资源。
+" />
+  <meta property="og:locale" content="cn" /><meta property="og:image" content="" />
+  
+
+  
+    <style>body{font-family:bree serif,sans-serif;-webkit-font-smoothing:antialiased;margin:0 20px}article{max-width:800px;margin-left:auto;margin-right:auto}a{color:#000;text-decoration:none}a:hover{font-weight:600;text-decoration:underline}.post-ads{margin:50px 0}.markdown-body{font-size:18px;max-width:100%}.markdown-body a{text-decoration:underline;text-decoration-color:#000}.markdown-body blockquote{margin:0;padding:0 1em;color:#57606a;border-left:.25em solid #d0d7de}.markdown-body pre{padding:16px;overflow:auto;border-radius:10px}.markdown-body code{padding:.2em .4em;font-size:85%;background-color:#f6f8fa;border-radius:6px}.markdown-body pre>code{padding:0;font-size:100%;background-color:inherit;border:0}.Chinese .markdown-body{line-height:200%}.site-date-catalog{font-size:2rem}.header-title{font-size:2rem;font-weight:700;margin-top:32px;font-family:bungee shade,sans-serif}.header-title a{text-decoration:none}.header-subtitle{color:#666}.header-items{margin:10px 0}.header-item{margin:0 5px}.header-line{width:100%;border-width:2px;border-color:#482936;border-style:solid none none none}.lang-switch{font-weight:600}#posts-list{min-height:600px}.posts-line{font-size:1.2rem;margin:12px 0}.posts-categories{font-size:.8rem;margin:auto;text-align:center}.posts-category{padding:3px 0;border:#000 2px solid;border-radius:5px}.site-footer{margin-top:50px}.site-footer-item{margin-right:12px}.post-header{margin-bottom:50px}.post-title{font-size:2rem;font-weight:600}.post-tags{display:inline;font-weight:600;padding:2px 5px;margin-right:6px;border:#000 2px solid;border-radius:5px}.post-date{font-weight:800;font-style:italic}.post-author{float:right;font-weight:600}.page-content{min-height:60%}.post-content{margin-bottom:50px}.post-content p{hyphens:auto;line-height:1.8;text-justify:ideographic;margin-bottom:1em}.post-content img{max-width:100%;display:block;margin-right:auto;margin-top:6px}.post-content .post-gallery{display:flex;flex-wrap:wrap;gap:6px}.post-content .post-gallery img{margin-right:auto;margin-top:auto;width:calc(50% - 3px)}.related-content{border-width:3px;border-style:solid;border-color:#000;padding:0 10px;margin-bottom:50px;margin-top:100px}.related-content li{margin:5px 0}.taxonomy-term{font-size:3rem}.gallery-img{text-align:center}.gallery-img span{text-align:center}.gallery-img-desc{font-size:.8em;font-weight:800}#disqus_thread{position:relative}#disqus_thread:after{content:"";display:block;height:55px;width:100%;position:absolute;bottom:0;background:#fff}@media screen and (max-width:600px){.header-title,.header-subtitle,.header-items{}.posts-line{font-size:16px}.markdown-body{font-size:16px}.post-title{font-size:2rem}.post-content p{letter-spacing:.05em}.post-content .post-gallery img{width:100%}}@media screen and (max-width:48em){.posts-category{display:none}}</style>
+  
+  
+    <style>.container,.container-fluid{margin-right:auto;margin-left:auto}.container-fluid{padding-right:2rem;padding-left:2rem}.row{box-sizing:border-box;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:0;-ms-flex:0 1 auto;flex:initial;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;margin-right:-.5rem;margin-left:-.5rem}.row.reverse{-webkit-box-orient:horizontal;-webkit-box-direction:reverse;-ms-flex-direction:row-reverse;flex-direction:row-reverse}.col.reverse{-webkit-box-orient:vertical;-webkit-box-direction:reverse;-ms-flex-direction:column-reverse;flex-direction:column-reverse}.col-xs,.col-xs-1,.col-xs-10,.col-xs-11,.col-xs-12,.col-xs-2,.col-xs-3,.col-xs-4,.col-xs-5,.col-xs-6,.col-xs-7,.col-xs-8,.col-xs-9,.col-xs-offset-0,.col-xs-offset-1,.col-xs-offset-10,.col-xs-offset-11,.col-xs-offset-12,.col-xs-offset-2,.col-xs-offset-3,.col-xs-offset-4,.col-xs-offset-5,.col-xs-offset-6,.col-xs-offset-7,.col-xs-offset-8,.col-xs-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-xs{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-xs-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-xs-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-xs-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-xs-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-xs-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-xs-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-xs-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-xs-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-xs-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-xs-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-xs-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-xs-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-xs-offset-0{margin-left:0}.col-xs-offset-1{margin-left:8.33333333%}.col-xs-offset-2{margin-left:16.66666667%}.col-xs-offset-3{margin-left:25%}.col-xs-offset-4{margin-left:33.33333333%}.col-xs-offset-5{margin-left:41.66666667%}.col-xs-offset-6{margin-left:50%}.col-xs-offset-7{margin-left:58.33333333%}.col-xs-offset-8{margin-left:66.66666667%}.col-xs-offset-9{margin-left:75%}.col-xs-offset-10{margin-left:83.33333333%}.col-xs-offset-11{margin-left:91.66666667%}.start-xs{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-xs{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-xs{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-xs{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-xs{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-xs{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-xs{-ms-flex-pack:distribute;justify-content:space-around}.between-xs{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-xs{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-xs{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}@media only screen and (min-width:48em){.container{width:49rem}.col-sm,.col-sm-1,.col-sm-10,.col-sm-11,.col-sm-12,.col-sm-2,.col-sm-3,.col-sm-4,.col-sm-5,.col-sm-6,.col-sm-7,.col-sm-8,.col-sm-9,.col-sm-offset-0,.col-sm-offset-1,.col-sm-offset-10,.col-sm-offset-11,.col-sm-offset-12,.col-sm-offset-2,.col-sm-offset-3,.col-sm-offset-4,.col-sm-offset-5,.col-sm-offset-6,.col-sm-offset-7,.col-sm-offset-8,.col-sm-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-sm{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-sm-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-sm-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-sm-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-sm-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-sm-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-sm-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-sm-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-sm-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-sm-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-sm-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-sm-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-sm-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-sm-offset-0{margin-left:0}.col-sm-offset-1{margin-left:8.33333333%}.col-sm-offset-2{margin-left:16.66666667%}.col-sm-offset-3{margin-left:25%}.col-sm-offset-4{margin-left:33.33333333%}.col-sm-offset-5{margin-left:41.66666667%}.col-sm-offset-6{margin-left:50%}.col-sm-offset-7{margin-left:58.33333333%}.col-sm-offset-8{margin-left:66.66666667%}.col-sm-offset-9{margin-left:75%}.col-sm-offset-10{margin-left:83.33333333%}.col-sm-offset-11{margin-left:91.66666667%}.start-sm{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-sm{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-sm{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-sm{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-sm{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-sm{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-sm{-ms-flex-pack:distribute;justify-content:space-around}.between-sm{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-sm{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-sm{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:64em){.container{width:65rem}.col-md,.col-md-1,.col-md-10,.col-md-11,.col-md-12,.col-md-2,.col-md-3,.col-md-4,.col-md-5,.col-md-6,.col-md-7,.col-md-8,.col-md-9,.col-md-offset-0,.col-md-offset-1,.col-md-offset-10,.col-md-offset-11,.col-md-offset-12,.col-md-offset-2,.col-md-offset-3,.col-md-offset-4,.col-md-offset-5,.col-md-offset-6,.col-md-offset-7,.col-md-offset-8,.col-md-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-md{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-md-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-md-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-md-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-md-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-md-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-md-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-md-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-md-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-md-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-md-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-md-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-md-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-md-offset-0{margin-left:0}.col-md-offset-1{margin-left:8.33333333%}.col-md-offset-2{margin-left:16.66666667%}.col-md-offset-3{margin-left:25%}.col-md-offset-4{margin-left:33.33333333%}.col-md-offset-5{margin-left:41.66666667%}.col-md-offset-6{margin-left:50%}.col-md-offset-7{margin-left:58.33333333%}.col-md-offset-8{margin-left:66.66666667%}.col-md-offset-9{margin-left:75%}.col-md-offset-10{margin-left:83.33333333%}.col-md-offset-11{margin-left:91.66666667%}.start-md{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-md{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-md{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-md{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-md{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-md{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-md{-ms-flex-pack:distribute;justify-content:space-around}.between-md{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-md{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-md{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:75em){.container{width:76rem}.col-lg,.col-lg-1,.col-lg-10,.col-lg-11,.col-lg-12,.col-lg-2,.col-lg-3,.col-lg-4,.col-lg-5,.col-lg-6,.col-lg-7,.col-lg-8,.col-lg-9,.col-lg-offset-0,.col-lg-offset-1,.col-lg-offset-10,.col-lg-offset-11,.col-lg-offset-12,.col-lg-offset-2,.col-lg-offset-3,.col-lg-offset-4,.col-lg-offset-5,.col-lg-offset-6,.col-lg-offset-7,.col-lg-offset-8,.col-lg-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-lg{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-lg-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-lg-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-lg-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-lg-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-lg-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-lg-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-lg-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-lg-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-lg-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-lg-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-lg-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-lg-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-lg-offset-0{margin-left:0}.col-lg-offset-1{margin-left:8.33333333%}.col-lg-offset-2{margin-left:16.66666667%}.col-lg-offset-3{margin-left:25%}.col-lg-offset-4{margin-left:33.33333333%}.col-lg-offset-5{margin-left:41.66666667%}.col-lg-offset-6{margin-left:50%}.col-lg-offset-7{margin-left:58.33333333%}.col-lg-offset-8{margin-left:66.66666667%}.col-lg-offset-9{margin-left:75%}.col-lg-offset-10{margin-left:83.33333333%}.col-lg-offset-11{margin-left:91.66666667%}.start-lg{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-lg{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-lg{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-lg{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-lg{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-lg{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-lg{-ms-flex-pack:distribute;justify-content:space-around}.between-lg{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-lg{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-lg{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}</style>
+  
+
+  
+
+  <link href="/index.xml" rel="alternate" type="application/rss+xml"
+    title="caiyuan">
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css?family=Bree+Serif|Bungee+Shade" rel="stylesheet">
+  
+  
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-xxx"></script>
+</head>
+
+
+<body>
+  <article class="post Chinese" id="article">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="site-header">
+          
+<header>
+  <div class="header-title">
+    <a href="/"
+      >Alex P</a
+    >
+  </div>
+  <div class="header-subtitle"></div>
+</header>
+<div class="row end-md header-items">
+  
+</div>
+<div class="row">
+  
+  <div class="lang-switch col-xs-3 col-xs-offset-9">
+    <a href="/en/">English</a>
+  </div>
+    
+</div>
+<div class="header-line"></div>
+
+        </div>
+        <header class="post-header">
+          <h1 class="post-title">左值右值</h1>
+          
+          <div class="row post-desc">
+            <div class="col-xs-6">
+              
+              <time class="post-date" datetime="2025-01-10 16:49:39 EST">
+                10 Jan 2025
+              </time>
+              
+            </div>
+            <div class="col-xs-6">
+              
+            </div>
+          </div>
+          
+        </header>
+
+        <div class="post-content markdown-body">
+          
+          <h1 id="左值右值">左值右值</h1>
+<p>我学了两次这个左值右值，发现总忘。写这篇笔记记录一下方便复习。</p>
+<h3 id="为什么要区分左值与右值">为什么要区分左值与右值？</h3>
+<p>首先是为什么要有左值（lvalue）和右值(rvalue)，不少语言并不区分两个令人困惑的概念。<br>
+<del>真正的原因其实要追溯到C语言的设计，这里只看C++上左右值的应用，实际上有自C++11开始，表达式的值分为左值、将亡值、纯右值以及两种混合泛左值和右值五种。</del><br>
+（<a href="https://www.zhihu.com/question/428340896/answer/2353437577">知乎链接</a>）</p>
+<p>C++11 中有右值引用，通过这个可以实现移动赋值操作符，移动构造函数。这是什么？</p>
+<h3 id="c有两种赋值方式拷贝赋值和移动赋值">C++有两种赋值方式：拷贝赋值和移动赋值。</h3>
+<p>拷贝赋值是十分常见的：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="font-style:italic">// 创建一个 vector 并初始化
+</span></span></span><span style="display:flex;"><span><span style="font-style:italic"></span>    std::vector&lt;<span style="">int</span>&gt; vec1 = {1, 2, 3, 4, 5};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="font-style:italic">// 使用拷贝赋值将 vec1 的值赋给 vec2
+</span></span></span><span style="display:flex;"><span><span style="font-style:italic"></span>    std::vector&lt;<span style="">int</span>&gt; vec2;
+</span></span><span style="display:flex;"><span>    vec2 = vec1; 
+</span></span></code></pre></div><p>这就是一个最简单的拷贝，vec2 将会有复制一遍 vec1 的内容，但是储存在另一块内存中。以下是一个很简单的 Point 类，很好地说明了这一点：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="">#include</span> <span style="">&lt;iostream&gt;</span><span style="">
+</span></span></span><span style="display:flex;"><span><span style=""></span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">class</span> <span style="font-weight:bold">Point</span> {
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">public</span>:
+</span></span><span style="display:flex;"><span>    <span style="font-style:italic">// 构造函数
+</span></span></span><span style="display:flex;"><span><span style="font-style:italic"></span>    Point(<span style="">int</span> x = 0, <span style="">int</span> y = 0) : x_(x), y_(y) {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="font-style:italic">// 拷贝赋值运算符
+</span></span></span><span style="display:flex;"><span><span style="font-style:italic"></span>    Point &amp;<span style="font-weight:bold">operator</span>=(<span style="font-weight:bold">const</span> Point &amp;other) {
+</span></span><span style="display:flex;"><span>        <span style="font-style:italic">// 直接赋值
+</span></span></span><span style="display:flex;"><span><span style="font-style:italic"></span>        x_ = other.x_;
+</span></span><span style="display:flex;"><span>        y_ = other.y_;
+</span></span><span style="display:flex;"><span>        <span style="font-weight:bold">return</span> *<span style="font-weight:bold">this</span>; <span style="font-style:italic">// 返回当前对象的引用
+</span></span></span><span style="display:flex;"><span><span style="font-style:italic"></span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="font-style:italic">// 打印点的坐标
+</span></span></span><span style="display:flex;"><span><span style="font-style:italic"></span>    <span style="">void</span> print() <span style="font-weight:bold">const</span> {
+</span></span><span style="display:flex;"><span>        std::cout &lt;&lt; <span style="font-style:italic">&#34;Point(&#34;</span> &lt;&lt; x_ &lt;&lt; <span style="font-style:italic">&#34;, &#34;</span> &lt;&lt; y_ &lt;&lt; <span style="font-style:italic">&#34;)</span><span style="font-weight:bold;font-style:italic">\n</span><span style="font-style:italic">&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>当然这存在一个问题，这种直接复制所有内容的深拷贝显然不适用于大量数据，好在C++有指针。
+<strong>移动赋值</strong> 解决了这个问题，通过“移动”资源的所有权，而不是复制资源，从而避免了昂贵的拷贝操作。移动操作将资源从一个对象转移到另一个对象，通常通过转移指针的方式，而不是进行深拷贝。相当于新对象窃取了源对象的资源。</p>
+<p>好吧，既然是窃取，问题又来了，为什么不直接使用源对象，非要多此一举来个窃取呢？
+因为C++中不同资源是有不同的所有者的，比如某个线程的资源在作用域结束后必须回收，但是它的资源应该传递给下一个线程，这里就可以用 <strong>移动赋值</strong>。</p>
+<p>好，绕了一大圈，现在我们可以引入左值右值了。因为正式右值引用允许我们转移而不是复制资源。</p>
+<h3 id="左值与右值的基本定义">左值与右值的基本定义</h3>
+<ul>
+<li>左值：一个能出现在赋值运算符左边的表达式。</li>
+<li>右值：一个不能出现在赋值运算符左边的表达式。</li>
+</ul>
+<p><del>废话！</del>
+真正重要的是左值有 明确的地址。右值 没有地址，它储存在一个临时的地址中（类似寄存器），计算完毕就会销毁。
+比如：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>int a = 10; // a 是一个左值，可以用 &amp;a 获取它的内存地址，10 是一个右值
+</span></span><span style="display:flex;"><span>int b = a;  // a 作为左值赋给 b
+</span></span><span style="display:flex;"><span>int b = a + 5;  // (a + 5) 是右值，它表示一个临时的计算结果，算完即毁
+</span></span></code></pre></div><h3 id="移动语义与右值引用">移动语义与右值引用</h3>
+<p>上文讲的 <strong>移动语义</strong> 与 <strong>右值引用</strong> 关系密切。<br>
+<strong>右值引用</strong> (<code>T&amp;&amp;</code>) 指向一个临时对象（右值），它允许我们转移资源而不是复制资源。</p>
+<h4 id="移动构造函数">移动构造函数</h4>
+<p>移动构造函数是一个专门处理右值的构造函数，它通过右值引用 (<code>T&amp;&amp;</code>) 接收一个临时对象，并且把这个临时对象的资源“转移”给新的对象。<br>
+这里的关键是 <strong><code>std::move()</code></strong>，它通过将左值转为右值引用，使得资源可以从一个对象“窃取”到另一个对象，从而实现移动语义。<br>
+<code>std::move()</code> 并没有改变任何东西，简单地说，就是告诉编译器“我不关心这个东西，可以把它的资源转移出去”。</p>
+<h4 id="示例代码">示例代码</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="">#include</span> <span style="">&lt;iostream&gt;</span><span style="">
+</span></span></span><span style="display:flex;"><span><span style="">#include</span> <span style="">&lt;vector&gt;</span><span style="">
+</span></span></span><span style="display:flex;"><span><span style="">#include</span> <span style="">&lt;utility&gt;</span><span style="">  </span><span style="font-style:italic">// for std::move
+</span></span></span><span style="display:flex;"><span><span style="font-style:italic"></span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">class</span> <span style="font-weight:bold">MyClass</span> {
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">public</span>:
+</span></span><span style="display:flex;"><span>    MyClass(<span style="">int</span> size) : data_(<span style="font-weight:bold">new</span> <span style="">int</span>[size]), size_(size) {
+</span></span><span style="display:flex;"><span>        std::cout &lt;&lt; <span style="font-style:italic">&#34;Constructor: Allocated &#34;</span> &lt;&lt; size_ &lt;&lt; <span style="font-style:italic">&#34; elements.</span><span style="font-weight:bold;font-style:italic">\n</span><span style="font-style:italic">&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="font-style:italic">// 移动构造函数
+</span></span></span><span style="display:flex;"><span><span style="font-style:italic"></span>    MyClass(MyClass&amp;&amp; other) <span style="font-weight:bold">noexcept</span> : data_(other.data_), size_(other.size_) {
+</span></span><span style="display:flex;"><span>        other.data_ = <span style="font-weight:bold">nullptr</span>;  <span style="font-style:italic">// 确保源对象不再释放已转移的资源
+</span></span></span><span style="display:flex;"><span><span style="font-style:italic"></span>        other.size_ = 0;
+</span></span><span style="display:flex;"><span>        std::cout &lt;&lt; <span style="font-style:italic">&#34;Move Constructor: Moved resources.</span><span style="font-weight:bold;font-style:italic">\n</span><span style="font-style:italic">&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="font-style:italic">// 析构函数
+</span></span></span><span style="display:flex;"><span><span style="font-style:italic"></span>    ~MyClass() {
+</span></span><span style="display:flex;"><span>        <span style="font-weight:bold">if</span> (data_) {
+</span></span><span style="display:flex;"><span>            <span style="font-weight:bold">delete</span>[] data_;
+</span></span><span style="display:flex;"><span>            std::cout &lt;&lt; <span style="font-style:italic">&#34;Destructor: Freed memory.</span><span style="font-weight:bold;font-style:italic">\n</span><span style="font-style:italic">&#34;</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="font-style:italic">// 打印数据
+</span></span></span><span style="display:flex;"><span><span style="font-style:italic"></span>    <span style="">void</span> print() <span style="font-weight:bold">const</span> {
+</span></span><span style="display:flex;"><span>        std::cout &lt;&lt; <span style="font-style:italic">&#34;Data size: &#34;</span> &lt;&lt; size_ &lt;&lt; std::endl;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">private</span>:
+</span></span><span style="display:flex;"><span>    <span style="">int</span>* data_;
+</span></span><span style="display:flex;"><span>    <span style="">int</span> size_;
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="">int</span> main() {
+</span></span><span style="display:flex;"><span>    MyClass obj1(10);  <span style="font-style:italic">// 创建一个对象 obj1，分配 10 个整数大小的内存
+</span></span></span><span style="display:flex;"><span><span style="font-style:italic"></span>    obj1.print();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="font-style:italic">// 使用 std::move 转移资源
+</span></span></span><span style="display:flex;"><span><span style="font-style:italic"></span>    MyClass obj2 = std::move(obj1);  <span style="font-style:italic">// 通过移动构造函数转移资源
+</span></span></span><span style="display:flex;"><span><span style="font-style:italic"></span>    obj2.print();
+</span></span><span style="display:flex;"><span>    obj1.print();  <span style="font-style:italic">// obj1 的资源被转移，应该不会再有有效数据
+</span></span></span><span style="display:flex;"><span><span style="font-style:italic"></span>
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">return</span> 0;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>重点说明</p>
+<ul>
+<li>
+<p>上面代码中的关键部分是 MyClass(MyClass&amp;&amp; other) noexcept : data_(other.data_), size_(other.size_)，在这里，other.data_ = nullptr; 是为了确保源对象不再释放已转移的资源，避免析构时释放已转移的内存。</p>
+</li>
+<li>
+<p>std::move() 只是将左值转换为右值引用。没有 std::move()，会变成普通的拷贝赋值操作，而非移动。</p>
+</li>
+</ul>
+<h3 id="为什么左值引用不行一定要使用右值引用">为什么左值引用不行，一定要使用右值引用？</h3>
+<p>因为 引用 本质上是一个绑定到对象的指针，比如：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>int a, &amp;a, int* b = &amp;a;
+</span></span></code></pre></div><p>这意味着 左值引用 只能存储地址相关的信息，对于数据本身没有任何操作能力。这就是为什么我们需要 右值引用 来执行移动操作，通过右值引用转移资源所有权，避免不必要的拷贝。</p>
+
+        </div>
+
+        <div class="row middle-xs">
+          <div class="col-xs-12">
+            
+          </div>
+        </div>
+        
+          <div class="row">
+            <div class="col-xs-12">
+              
+            </div>
+          </div>
+
+          
+
+
+
+          
+          
+          <div style="height: 50px;"></div>
+          
+          <div class="post-comments">
+            <div id="disqus_thread"></div>
+<script>
+  window.addEventListener("load", () => {
+    (function() {
+      
+      var d = document,
+        s = d.createElement("script");
+      s.src = "https://zexipeng.disqus.com/embed.js";
+      s.setAttribute("data-timestamp", +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  });
+</script>
+<noscript
+  >Please enable JavaScript to view the
+  <a href="https://disqus.com/?ref_noscript"
+    >comments powered by Disqus.</a
+  ></noscript
+>
+
+          </div>
+          
+        
+
+        <div class="site-footer">
+  
+  
+</div>
+
+      </div>
+    </div>
+  </article>
+
+  
+
+<script>
+  
+  
+    
+    
+  
+</script>
+
+  
+
+</body>
+
+</html>

@@ -2,14 +2,14 @@
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <sitemap>
-    <loc>http://localhost:1313/cn/sitemap.xml</loc>
+    <loc>https://volcanicbottle.github.io/cn/sitemap.xml</loc>
     
-      <lastmod>2025-01-10T16:49:39-05:00</lastmod>
+      <lastmod>2025-01-10T17:13:51-05:00</lastmod>
     
   </sitemap>
   
   <sitemap>
-    <loc>http://localhost:1313/en/sitemap.xml</loc>
+    <loc>https://volcanicbottle.github.io/en/sitemap.xml</loc>
     
   </sitemap>
   

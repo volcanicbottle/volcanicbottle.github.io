@@ -2,59 +2,59 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/</loc>
-    <lastmod>2025-01-10T16:49:39-05:00</lastmod>
+    <loc>https://volcanicbottle.github.io/</loc>
+    <lastmod>2025-01-10T17:13:51-05:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/en/"
+                href="https://volcanicbottle.github.io/en/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
-                href="http://localhost:1313/"
+                href="https://volcanicbottle.github.io/"
                 />
   </url><url>
-    <loc>http://localhost:1313/posts/</loc>
+    <loc>https://volcanicbottle.github.io/post/</loc>
+    <lastmod>2025-01-10T17:13:51-05:00</lastmod>
+  </url><url>
+    <loc>https://volcanicbottle.github.io/post/lvrv/</loc>
+    <lastmod>2025-01-10T17:13:51-05:00</lastmod>
+  </url><url>
+    <loc>https://volcanicbottle.github.io/posts/</loc>
     <lastmod>2025-01-10T16:49:39-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/post/</loc>
+    <loc>https://volcanicbottle.github.io/posts/lvalue-rvalue/</loc>
     <lastmod>2025-01-10T16:49:39-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/post/lvalue-rvalue/</loc>
-    <lastmod>2025-01-10T16:49:39-05:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/lvalue-rvalue/</loc>
-    <lastmod>2025-01-10T16:49:39-05:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/post/first-post/</loc>
+    <loc>https://volcanicbottle.github.io/post/first-post/</loc>
     <lastmod>2025-01-05T20:39:16-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/first-post/</loc>
+    <loc>https://volcanicbottle.github.io/posts/first-post/</loc>
     <lastmod>2025-01-05T20:39:16-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>https://volcanicbottle.github.io/categories/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/en/categories/"
+                href="https://volcanicbottle.github.io/en/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
-                href="http://localhost:1313/categories/"
+                href="https://volcanicbottle.github.io/categories/"
                 />
   </url><url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://volcanicbottle.github.io/tags/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/en/tags/"
+                href="https://volcanicbottle.github.io/en/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
-                href="http://localhost:1313/tags/"
+                href="https://volcanicbottle.github.io/tags/"
                 />
   </url>
 </urlset>

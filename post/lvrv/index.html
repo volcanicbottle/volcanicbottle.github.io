@@ -7,8 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="author" content="" />
-  <meta property="og:url" content="https://volcanicbottle.github.io/posts/lvalue-rvalue/" />
-  <link rel="canonical" href="https://volcanicbottle.github.io/posts/lvalue-rvalue/" /><link rel="alternate" type="application/atom+xml" href="https://volcanicbottle.github.io/index.xml" title="caiyuan">
+  <meta property="og:url" content="https://volcanicbottle.github.io/post/lvrv/" />
+  <link rel="canonical" href="https://volcanicbottle.github.io/post/lvrv/" /><link rel="alternate" type="application/atom+xml" href="https://volcanicbottle.github.io/index.xml" title="caiyuan">
 
   <script type="application/ld+json">
   {
@@ -18,7 +18,7 @@
            "@type": "WebPage",
            "@id": "https:\/\/volcanicbottle.github.io\/"
       },
-      "articleSection" : "posts",
+      "articleSection" : "post",
       "name" : "左值右值",
       "headline" : "左值右值",
       "description" : "左值右值 我学了两次这个左值右值，发现总忘。写这篇笔记记录一下方便复习。\n为什么要区分左值与右值？ 首先是为什么要有左值（lvalue）和右值(rvalue)，不少语言并不区分两个令人困惑的概念。\n真正的原因其实要追溯到C语言的设计，这里只看C\u002b\u002b上左右值的应用，实际上有自C\u002b\u002b11开始，表达式的值分为左值、将亡值、纯右值以及两种混合泛左值和右值五种。\n（知乎链接）\nC\u002b\u002b11 中有右值引用，通过这个可以实现移动赋值操作符，移动构造函数。这是什么？\nC\u002b\u002b有两种赋值方式：拷贝赋值和移动赋值。 拷贝赋值是十分常见的：\n\/\/ 创建一个 vector 并初始化 std::vector\u0026lt;int\u0026gt; vec1 = {1, 2, 3, 4, 5}; \/\/ 使用拷贝赋值将 vec1 的值赋给 vec2 std::vector\u0026lt;int\u0026gt; vec2; vec2 = vec1; 这就是一个最简单的拷贝，vec2 将会有复制一遍 vec1 的内容，但是储存在另一块内存中。以下是一个很简单的 Point 类，很好地说明了这一点：\n#include \u0026lt;iostream\u0026gt; class Point { public: \/\/ 构造函数 Point(int x = 0, int y = 0) : x_(x), y_(y) {} \/\/ 拷贝赋值运算符 Point \u0026amp;operator=(const Point \u0026amp;other) { \/\/ 直接赋值 x_ = other.x_; y_ = other.y_; return *this; \/\/ 返回当前对象的引用 } \/\/ 打印点的坐标 void print() const { std::cout \u0026lt;\u0026lt; \u0026#34;Point(\u0026#34; \u0026lt;\u0026lt; x_ \u0026lt;\u0026lt; \u0026#34;, \u0026#34; \u0026lt;\u0026lt; y_ \u0026lt;\u0026lt; \u0026#34;)\\n\u0026#34;; } }; 当然这存在一个问题，这种直接复制所有内容的深拷贝显然不适用于大量数据，好在C\u002b\u002b有指针。 移动赋值 解决了这个问题，通过“移动”资源的所有权，而不是复制资源，从而避免了昂贵的拷贝操作。移动操作将资源从一个对象转移到另一个对象，通常通过转移指针的方式，而不是进行深拷贝。相当于新对象窃取了源对象的资源。\n",
@@ -29,9 +29,9 @@
       "accountablePerson" : "",
       "copyrightHolder" : "",
       "copyrightYear" : "2025",
-      "datePublished": "2025-01-10 16:49:39 -0500 EST",
-      "dateModified" : "2025-01-10 16:49:39 -0500 EST",
-      "url" : "https:\/\/volcanicbottle.github.io\/posts\/lvalue-rvalue\/",
+      "datePublished": "2025-01-10 17:13:51 -0500 EST",
+      "dateModified" : "2025-01-10 17:13:51 -0500 EST",
+      "url" : "https:\/\/volcanicbottle.github.io\/post\/lvrv\/",
       "keywords" : [  ]
   }
 </script>
@@ -110,19 +110,6 @@ C&#43;&#43;有两种赋值方式：拷贝赋值和移动赋值。 拷贝赋值�
         </div>
         <header class="post-header">
           <h1 class="post-title">左值右值</h1>
-          
-          <div class="row post-desc">
-            <div class="col-xs-6">
-              
-              <time class="post-date" datetime="2025-01-10 16:49:39 EST">
-                10 Jan 2025
-              </time>
-              
-            </div>
-            <div class="col-xs-6">
-              
-            </div>
-          </div>
           
         </header>
 
@@ -255,44 +242,6 @@ C&#43;&#43;有两种赋值方式：拷贝赋值和移动赋值。 拷贝赋值�
             
           </div>
         </div>
-        
-          <div class="row">
-            <div class="col-xs-12">
-              
-            </div>
-          </div>
-
-          
-
-
-
-          
-          
-          <div style="height: 50px;"></div>
-          
-          <div class="post-comments">
-            <div id="disqus_thread"></div>
-<script>
-  window.addEventListener("load", () => {
-    (function() {
-      
-      var d = document,
-        s = d.createElement("script");
-      s.src = "https://zexipeng.disqus.com/embed.js";
-      s.setAttribute("data-timestamp", +new Date());
-      (d.head || d.body).appendChild(s);
-    })();
-  });
-</script>
-<noscript
-  >Please enable JavaScript to view the
-  <a href="https://disqus.com/?ref_noscript"
-    >comments powered by Disqus.</a
-  ></noscript
->
-
-          </div>
-          
         
 
         <div class="site-footer">
